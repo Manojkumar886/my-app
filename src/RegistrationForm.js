@@ -1,10 +1,43 @@
 import React from "react";
+import {useState} from "react";
+import {create,list} from './ArrayValues'
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 
 export const Rform=()=>{
+    //const[data,setData]=useState(initialization)
+    //person.['resName'];
+    const[person,setPerson]=useState({
+        "stuName":"",
+        "stuDob":"",
+        "stuAdd":"",
+        "stuEmail":"",
+        "stuNum":0,
+        "stuCourse":"",
+        "stuPayment":"",
+        "stuSkills":new Array()
+    })
+    const tracky=(hey)=>
+    {
+        const{value}=hey.target
+        person.stuSkills.push(value)
+    }
+    const track=(manoj)=>
+    {
+        const{name,value}=manoj.target
+        setPerson(
+            (prev)=>
+            {
+                return{
+                    ...prev,
+                    [name]:value
+                }
+            }
+        )
+    }
     const reg=async()=>{
-          alert("Start a new life-Welcome to Zealous System Corp....!" )
-        
+          //alert("Start a new life-Welcome to Zealous System Corp....!" )
+        //alert("Registered"+JSON.stringify(person))
+        create(person)
     }
     const can=()=>{
         alert("Better luck next time")
@@ -41,14 +74,18 @@ export const Rform=()=>{
                     <div className="form-group mt-2 ">
                         <label>Name</label>
                         <input type="text" 
-                        name="Sname" 
+                        name="stuName" 
+                        value={person.stuName}
+                        onChange={track}
                         placeholder="Enter the Studentname" 
                         className="form-control"/>
                     </div>
                     <div className="form-group mt-2">
                         <label>Date Of Birth</label>
                         <input type="Date"
-                        name="DOB"
+                        name="stuDob"
+                        onChange={track}
+                        value={person.stuDob}
                         placeholder="Enter your Date of Birth"
                         className="form-control"
                         />
@@ -57,14 +94,18 @@ export const Rform=()=>{
                     <div className="form-group mt-2 ">
                         <label>Address</label>
                         <textarea  
-                        name="Tarea" 
+                        name="stuAdd" 
+                        onChange={track}
+                        value={person.stuAdd}
                         placeholder="Tell us Validate Address/Pincode/Districk/State" 
                         className="form-control"/>
                     </div>
                     <div className="form-group mt-2">
                         <label>Contact number</label>
                         <input type="number"
-                        name="num"
+                        name="stuNum"
+                        onChange={track}
+                        value={person.stuNum}
                         placeholder="Linked By Aadhar Mobile Number"
                         className="form-control"
                          />
@@ -72,7 +113,9 @@ export const Rform=()=>{
                     <div className="form-group mt-2">
                         <label>Gmail</label>
                         <input type="email"
-                        name="email"
+                        name="stuEmail"
+                        onChange={track}
+                        value={person.stuEmail}
                         placeholder="durexcement123@gmail.com"
                         className="form-control"
                         />
@@ -81,22 +124,24 @@ export const Rform=()=>{
                     <div className="form-group mt-2 ">
                         <label>Course name</label>
                         <input type="text"
-                        name="Course" 
+                        name="stuCourse" 
+                        onChange={track}
+                        value={person.stuCourse}
                         placeholder="Plese tell us Correct detail of course" 
                         className="form-control"/>
                     </div>
                     <div className="mt-2">
                         <label>Payment Details</label>
-                        <input type="radio" name="Payment" value="Cash" className="ms-3" />Cash
-                        <input type="radio" name="Payment" value="Card" className="ms-3" />Card
-                        <input type="radio" name="Payment" value="Chrque" className="ms-3" />Cheque
+                        <input onChange={track} type="radio" name="stuPayment" value="Cash" className="ms-3" />Cash
+                        <input onChange={track} type="radio" name="stuPayment" value="Card" className="ms-3" />Card
+                        <input onChange={track} type="radio" name="stuPayment" value="Cheque" className="ms-3" />Cheque
                     </div>
                     <div className="form-group mt-2">
                         <label>Languages</label>
-                        <input type="checkbox" name="tamil"  value="Tamil"  className="form-input-check ms-5"/>Tamil
-                        <input type="checkbox" name="telugu" value="Telugu"  className="form-input-check ms-5"/>Telugu
-                        <input type="checkbox" name="kannada" value="Kannada"  className="form-input-check ms-5"/>Kannada
-                        <input type="checkbox" name="malayalam" value="Malayalam"  className="form-input-check ms-5"/>Malayalam
+                        <input onChange={tracky} type="checkbox" name="stuSkills"  value="Tamil"  className="form-input-check ms-5"/>Tamil
+                        <input onChange={tracky} type="checkbox" name="stuSkills" value="Telugu"  className="form-input-check ms-5"/>Telugu
+                        <input onChange={tracky} type="checkbox" name="stuSkills" value="Kannada"  className="form-input-check ms-5"/>Kannada
+                        <input onChange={tracky} type="checkbox" name="stuSkills" value="Malayalam"  className="form-input-check ms-5"/>Malayalam
                     </div>
                     <div className="row justify-content-around mt-4">
                         <button onClick={reg} className="btn btn-outline-success col-4" type="submit">Register</button>

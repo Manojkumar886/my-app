@@ -1,25 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import { list } from "./ArrayValues";
 import { Rform } from "./RegistrationForm";
 
 export const Main=()=>{   
+    const[tempArray,setTempArray]=useState([])
+    const[createView,setCreateview]=useState(false)
+    
     const add=()=>
         {
-           <Rform/>
+            setTempArray(list())
+           
         }
-        const remove=()=>
+        useEffect(()=>
         {
-            alert("currently Unavailable in login page")
-        }
+            add()
+        })
 return(
         <>
             <div className="container-fluid">
-                <div className="row justify-content-around ">
-                <button className="btn btn-outline-success mb-3 mt-5 col-4 " onClick={add()}  >
-                New Student Register
+                {(createView)?
+                <>
+                    <Rform/>
+                    <button className="btn btn-outline-secondary"onClick={
+                        ()=>
+                        {
+                            setCreateview(false)
+                        }
+                    }>
+                        Back
+                    </button>
+                </>
+                :
+                <>
+                <button className="btn btn-outline-success mb-3"
+                onClick={()=>
+                {
+                    setCreateview(true)
+                }}>
+                    Recruite New Student
                 </button>
-                    <button onClick={remove} className="btn btn-outline-danger mb-3 mt-5  col-4" >Login
-                </button>
+                </>
+                }
+
+
+
+
+
+
                 <h1 className="text-light text-center bg-info"><i><b>Zealous new Subcriber</b></i></h1>
                 </div>
                 <div className="row justify-content-center bg-light text-light">
@@ -30,17 +58,32 @@ return(
                                         <th>Name</th>
                                         <th>Date Of Birth</th>
                                         <th>Address</th>
-                                        <th>Contact Number</th>
                                         <th>Mail Id</th>
+                                        <th>Contact Number</th>
                                         <th>Course Details</th>
                                         <th>Payment Details</th>
+                                        <th>LanguagesKnown</th>
                                         <th>ACTIONS</th>
                                    </tr>
                                 </thead>
+                                <tbody>
+                                    {tempArray.map((ele)=>(
+                                        <tr>   
+                                        <td>{ele.stuName}</td>                                 
+                                        <td>{ele.stuDob}</td>
+                                        <td>{ele.stuAdd}</td>
+                                        <td>{ele.stuEmail}</td>
+                                        <td>{ele.stuNum}</td>
+                                        <td>{ele.stuCourse}</td>
+                                        <td>{ele.stuPayment}</td>
+                                        <td>{ele.stuSkills}</td>
+                                        </tr>
+
+                                    ))}
+                                </tbody>
                         </table>
                         </div>
                     </div>
-            </div>
         </>
     )
 }

@@ -7,6 +7,7 @@ import { Rform } from './RegistrationForm';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>
-  <Rform/>
+  {/* <Rform/> */}
+  <Main/>
   </>
 );
