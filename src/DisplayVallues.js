@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
-import { list } from "./ArrayValues";
+import { fetchExact, list, wash } from "./ArrayValues";
 import { Rform } from "./RegistrationForm";
+import { Update } from "./Update";
 
 export const Main=()=>{   
     const[tempArray,setTempArray]=useState([])
     const[createView,setCreateview]=useState(false)
+    const[updateView,setUpdateView]=useState(false)
+    const[pos,setPos]=useState(0)
+    const[obj,setObj]=useState({})
     
     const add=()=>
         {
@@ -32,6 +36,18 @@ return(
                     </button>
                 </>
                 :
+                (updateView)?
+                <>
+                    <Update who={pos} mention={obj}/>
+                    <button className="btn btn-outline-secondary" onClick={
+                        ()=>{
+                            setUpdateView(false)
+                        }
+                    }>
+                         Back
+                    </button>
+                </>
+                :
                 <>
                 <button className="btn btn-outline-success mb-3"
                 onClick={()=>
@@ -42,11 +58,6 @@ return(
                 </button>
                 </>
                 }
-
-
-
-
-
 
                 <h1 className="text-light text-center bg-info"><i><b>Zealous new Subcriber</b></i></h1>
                 </div>
@@ -77,6 +88,24 @@ return(
                                         <td>{ele.stuCourse}</td>
                                         <td>{ele.stuPayment}</td>
                                         <td>{ele.stuSkills}</td>
+                                        <td>
+                                        <button className="btn btn-outline-warning rounded-circle"
+                                                onClick={()=>{
+                                                    setUpdateView(true)
+                                                    setPos(pos)
+                                                    const y=fetchExact(ele.stuName)
+                                                    setObj(y)
+                                                }}>
+                                                    Edit <i className="bi bi-pencil-fill"></i> 
+                                                </button>
+                                                <button className="btn btn-outline-danger"
+                                                onClick={()=>
+                                                setTempArray(wash(pos))
+                                                }>
+                                                    Delete
+                                                </button>
+                                        </td>
+
                                         </tr>
 
                                     ))}

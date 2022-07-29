@@ -51,7 +51,21 @@ export const list=()=>
     return mystudents
 }
 
-export const read=(index)=>
+export const fetchExact=(name)=>{
+    const tmp=mystudents.filter((element)=>{
+        return element.stuName===name
+    })
+    return tmp[0]
+}
+
+export const alter=(place,data)=>{
+    mystudents[place]=data
+} 
+export const wash=(index)=>
 {
-    return mystudents[index]
+    mystudents=mystudents.filter((d,p)=>
+    {
+        return p!==index
+    })
+    return mystudents
 }
